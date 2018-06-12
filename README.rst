@@ -1,15 +1,15 @@
-================
-django-shortcuts
-================
+====================
+django-shortcuts-ext
+====================
 
-Django ShortCuts
+Django Shortcuts Extensions
 
 Installation
 ============
 
 ::
 
-    pip install django-shortcuts
+    pip install django-shortcuts-ext
 
 
 Usage
@@ -17,5 +17,5 @@ Usage
 
 ::
 
-    from django_shortcuts import json_render, cookie_redirect
+    from django_shortcuts_ext import json_render, cookie_redirect
 
