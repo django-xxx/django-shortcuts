@@ -20,7 +20,7 @@ setup(
 
     packages=['django_shortcuts_ext'],
     py_modules=[],
-    install_requires=['django-json-render'],
+    install_requires=['django-json-render>=1.0.2'],
 
     classifiers=[
         'Development Status :: 5 - Production/Stable',

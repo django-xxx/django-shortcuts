@@ -5,8 +5,11 @@ from json_render import json_render
 
 
 def set_or_del_cookie(response, setcookie=False, delcookie=False, signedcookie=True, cookie_key=None, cookie_value=None, cookie_salt=None,
-                  cookie_max_age=None, cookie_expires=None, cookie_path='/', cookie_domain=None, cookie_secure=False, cookie_httponly=False):
+                  cookie_max_age=None, cookie_expires=None, cookie_path='/', cookie_domain=None, cookie_secure=False, cookie_httponly=False, ignore_blank=False):
     if setcookie:
+        if ignore_blank and not cookie_value:
+            return response
+
         if signedcookie:
             response.set_signed_cookie(cookie_key, cookie_value, salt=cookie_salt, **{
                 'max_age': cookie_max_age,
@@ -26,7 +29,7 @@ def set_or_del_cookie(response, setcookie=False, delcookie=False, signedcookie=T
 
 
 def cookie_redirect(to, setcookie=False, delcookie=False, signedcookie=True, cookie_key=None, cookie_value=None, cookie_salt=None,
-                    cookie_max_age=None, cookie_expires=None, cookie_path='/', cookie_domain=None, cookie_secure=False, cookie_httponly=False, *args, **kwargs):
+                    cookie_max_age=None, cookie_expires=None, cookie_path='/', cookie_domain=None, cookie_secure=False, cookie_httponly=False, ignore_blank=False, *args, **kwargs):
 
     response = redirect(to, *args, **kwargs)
 
@@ -43,5 +46,6 @@ def cookie_redirect(to, setcookie=False, delcookie=False, signedcookie=True, coo
         cookie_path=cookie_path,
         cookie_domain=cookie_domain,
         cookie_secure=cookie_secure,
-        cookie_httponly=cookie_httponly
+        cookie_httponly=cookie_httponly,
+        ignore_blank=ignore_blank
     )
