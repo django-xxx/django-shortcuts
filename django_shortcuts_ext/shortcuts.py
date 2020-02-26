@@ -42,10 +42,10 @@ def set_or_del_cookie(response, setcookie=False, delcookie=False, signedcookie=T
                             response.set_cookie(k, v, max_age=cookie_max_age, expires=cookie_expires, path=cookie_path, domain=cookie_domain, secure=cookie_secure, httponly=cookie_httponly)
 
     if delcookie:
-        response.delete_cookie(cookie_key)
+        response.delete_cookie(cookie_key, path=cookie_path, domain=cookie_domain)
         if cookie_kvs:
             for k, v in cookie_kvs:
-                response.delete_cookie(k)
+                response.delete_cookie(k, path=cookie_path, domain=cookie_domain)
 
     return response
 
