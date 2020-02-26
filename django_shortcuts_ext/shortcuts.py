@@ -5,7 +5,7 @@ from json_render import json_render
 
 
 def set_or_del_cookie(response, setcookie=False, delcookie=False, signedcookie=True, cookie_key=None, cookie_value=None, cookie_kvs=None, cookie_salt=None,
-                  cookie_max_age=None, cookie_expires=None, cookie_path='/', cookie_domain=None, cookie_secure=False, cookie_httponly=False, ignore_blank=False):
+                      cookie_max_age=None, cookie_expires=None, cookie_path='/', cookie_domain=None, cookie_secure=False, cookie_httponly=False, ignore_blank=False):
     if setcookie:
         if ignore_blank and not cookie_value:
             pass
@@ -48,6 +48,37 @@ def set_or_del_cookie(response, setcookie=False, delcookie=False, signedcookie=T
                 response.delete_cookie(k, path=cookie_path, domain=cookie_domain)
 
     return response
+
+
+def set_cookie(response, setcookie=False, signedcookie=True, cookie_key=None, cookie_value=None, cookie_kvs=None, cookie_salt=None,
+               cookie_max_age=None, cookie_expires=None, cookie_path='/', cookie_domain=None, cookie_secure=False, cookie_httponly=False, ignore_blank=False):
+    return set_or_del_cookie(
+        response,
+        setcookie=setcookie,
+        signedcookie=signedcookie,
+        cookie_key=cookie_key,
+        cookie_value=cookie_value,
+        cookie_kvs=cookie_kvs,
+        cookie_salt=cookie_salt,
+        cookie_max_age=cookie_max_age,
+        cookie_expires=cookie_expires,
+        cookie_path=cookie_path,
+        cookie_domain=cookie_domain,
+        cookie_secure=cookie_secure,
+        cookie_httponly=cookie_httponly,
+        ignore_blank=ignore_blank
+    )
+
+
+def del_cookie(response, delcookie=False, cookie_key=None, cookie_kvs=None, cookie_path='/', cookie_domain=None):
+    return set_or_del_cookie(
+        response,
+        delcookie=delcookie,
+        cookie_key=cookie_key,
+        cookie_kvs=cookie_kvs,
+        cookie_path=cookie_path,
+        cookie_domain=cookie_domain,
+    )
 
 
 cookie_render = json_render
